@@ -245,7 +245,7 @@
       </header>
         <h1>Pilih Style Baju Anda</h1>
         <div id="page1" class="container active">
-            <p class="question">Apakah anda lebih suka berada di rumah saja atau lebih suka keluar rumah?</p>
+            <p class="question" style="line-height: 3.2rem;">Apakah anda lebih <span style="padding: 5px; background-color: #be1d00; color: #fff; border-radius: 25px;" >suka</span>  berada di rumah saja atau lebih suka keluar rumah?</p>
             <div class="options">
                 <label><input type="radio" name="activity" value="home"> Berada di rumah</label>
                 <label><input type="radio" name="activity" value="outside"> Keluar rumah</label>
@@ -254,7 +254,7 @@
         </div>
 
         <div id="page2" class="container">
-            <p class="question">Apakah anda sangat percaya diri dengan diri anda?</p>
+            <p class="question">Apakah anda sangat <span style="padding: 5px; background-color: #076904; color: #fff; border-radius: 25px;" >Percaya Diri</span> dengan diri anda?</p>
             <div class="options">
                 <label><input type="radio" name="confidence" value="yes"> Ya</label>
                 <label><input type="radio" name="confidence" value="no"> Tidak</label>
@@ -264,7 +264,7 @@
         </div>
 
         <div id="page3" class="container">
-            <p class="question">Warna apa yang anda sukai?</p>
+            <p class="question"><span style="padding: 5px; background-color: #1d058a; color: #fff; border-radius: 25px;" >Warna</span> apa yang anda sukai?</p>
             <div class="options">
                 <label><input type="radio" name="color" value="bright"> Terang</label>
                 <label><input type="radio" name="color" value="dark"> Gelap</label>
@@ -274,7 +274,7 @@
         </div>
 
         <div id="page4" class="container">
-            <p class="question">Rentang usia anda berapa?</p>
+            <p class="question">Rentang <span style="padding: 5px; background-color: #be009e; color: #fff; border-radius: 25px;" >Usia</span> anda berapa?</p>
             <div class="options">
                 <label><input type="radio" name="age" value="young"> Di bawah 20</label>
                 <label><input type="radio" name="age" value="adult"> 20-30</label>
@@ -285,7 +285,7 @@
         </div>
 
         <div id="page5" class="container">
-            <p class="question">Apa gender anda?</p>
+            <p class="question">Apa <span style="padding: 5px; background-color: #252525; color: #fff; border-radius: 25px;" >Gender</span> anda?</p>
             <div class="options">
                 <label><input type="radio" name="gender" value="male"> Laki-laki</label>
                 <label><input type="radio" name="gender" value="female"> Perempuan</label>
@@ -294,12 +294,9 @@
             <button class="btn" onclick="showResults()">Lihat Hasil</button>
         </div>
     </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        function nextPage(page) {
-            document.getElementById(`page${page}`).classList.remove('active');
-            document.getElementById(`page${page + 1}`).classList.add('active');
-        }
+        
 
         function showResults() {
             let activity = document.querySelector('input[name="activity"]:checked').value;
@@ -309,6 +306,34 @@
             let gender = document.querySelector('input[name="gender"]:checked').value;
             window.location.href = `results.html?activity=${activity}&confidence=${confidence}&color=${color}&age=${age}&gender=${gender}`;
         }
+
+        function nextPage(pageNumber) {
+    const currentPage = document.getElementById(`page${pageNumber}`);
+    const nextPage = document.getElementById(`page${pageNumber + 1}`);
+    
+    // Cek apakah ada input yang dipilih
+    const selectedOption = currentPage.querySelector('input[type="radio"]:checked');
+
+    if (!selectedOption) {
+        Swal.fire({
+            icon: "warning",
+            title: "Oops...",
+            text: "Harap pilih salah satu opsi sebelum melanjutkan!",
+            confirmButtonColor: "#be1d00"
+        });
+        return;
+    }
+
+    // Hapus class "active" dari semua halaman
+    document.querySelectorAll(".container").forEach(page => {
+        page.classList.remove("active");
+    });
+
+    // Tambahkan class "active" ke halaman berikutnya jika ada
+    if (nextPage) {
+        nextPage.classList.add("active");
+    }
+}
     </script>
      <script src="js/jquery.min.js"></script>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>

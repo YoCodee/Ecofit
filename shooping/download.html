@@ -9,4 +9,34 @@
     <h1>Halaman Download</h1>
     <button id="export-pdf">Download PDF</button>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const { jsPDF } = window.jspdf;
+      const tukarBeliData = JSON.parse(localStorage.getItem("tukarBeliData"));
+  
+      if (!tukarBeliData || tukarBeliData.length === 0) {
+        alert("Tidak ada data Tukar Beli!");
+        return;
+      }
+  
+      const doc = new jsPDF();
+      doc.text("Laporan Tukar Beli", 10, 10);
+  
+      let y = 20;
+      tukarBeliData.forEach((item, index) => {
+        doc.text(`Data ${index + 1}:`, 10, y);
+        doc.text(`Nama: ${item.name}`, 10, y + 10);
+        doc.text(`Nomor HP: ${item.phone}`, 10, y + 20);
+        doc.text(`Barang Ditukar: ${item.product}`, 10, y + 30);
+        doc.text(`Bukti: ${item.file}`, 10, y + 40);
+        y += 50;
+      });
+  
+      // Simpan dan Download PDF otomatis
+      doc.save("TukarBeli_Report.pdf");
+    });
+  </script>
+  
 </html>

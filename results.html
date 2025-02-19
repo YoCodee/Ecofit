@@ -244,10 +244,15 @@ data-primary-color="#8c6144"
                 class="content-row full text-align-center row_padding_left row_padding_right dark-section"
                 data-bgcolor="#ffffff"
               >
-                <h1 style="font-size: 36px; font-weight: bold; margin-top: 70px; color: #000000; text-align: center;" >
-                  Hasil pencarian
-                </h1>
-                <div class="container" id="results"></div>
+                
+                <div class="container"style="min-height: 82vh;" >
+                  <h1 style="font-size: 36px; font-weight: bold; margin-top: 4px; align-items: end; display: flex; color: #000000; text-align: center;" >
+                    Hasil pencarian
+                  </h1>
+                  <div id="results" style="display: flex;  justify-content: center;">
+
+                  </div>
+                </div>
                 <div class="content-row full dark-section" data-bgcolor="#171717">
                   <figure class="has-parallax has-parallax-content" data-delay="100">
                     <img src="image/about/FIT.png" alt="Image Title" />
@@ -256,7 +261,7 @@ data-primary-color="#8c6144"
                         <div class="inner">
                           <h2 class=" has-mask-fill primary-font-title">
                             Hasil Rekomendasi ini didapat dari Hasil dari Pilihanmu dan
-                            Hasil ini bersifat subjektif berdasarkan jawaban anda.
+                            Sudah Memenuhi sebagai Fashion Ramah Lingkungan.
                           </h2>
                         </div>
                       </div>
@@ -401,6 +406,20 @@ data-primary-color="#8c6144"
       image: "/image/img-style/4.png",
       condition: gender === "male" && confidence === "yes",
     },
+    {
+      id: 11,
+      style: "Nautical",
+      description: "Gaya Nongkrong tapi Sopan dan asik",
+      image: "/image/img-style/6.png",
+      condition: age === "young" && confidence === "yes",
+    },
+    {
+      id: 12,
+      style: "Outside Style",
+      description: "Gaya Rapih dan Sopan untuk kegiatan di luar rumah",
+      image: "/image/img-style/Sweater Vintage.png",
+      condition: age === "young" && confidence === "yes",
+    },
         ];
 
         const resultsContainer = document.getElementById('results');
@@ -411,7 +430,7 @@ data-primary-color="#8c6144"
                 matched = true;
                 const card = document.createElement('div');
                 card.classList.add('card');
-                card.innerHTML = `<img src="${item.image}"  alt="${item.style}"><h2>${item.style}</h2><p>${item.description}</p>`;
+                card.innerHTML = ` <img src="${item.image} "  alt="${item.style}"><p style="font-weight: bold; font-size: 20px;">${item.style}</p><p>${item.description}</p>`;
                 resultsContainer.appendChild(card);
             }
         });
@@ -437,4 +456,11 @@ data-primary-color="#8c6144"
      <script src="js/scripts.js"></script>
  
 </body>
+
+<style>
+  .card {
+  
+    max-height: max-content;
+  }
+</style>
 </html>

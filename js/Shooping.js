@@ -508,14 +508,3 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-document.addEventListener("DOMContentLoaded", function () {
-  const exportPdfButton = document.getElementById("export-pdf");
-
-  // Cek apakah path URL mengandung "Shoop/down"
-  if (window.location.pathname.includes("http://127.0.0.1:5500/shoop/down.html")) {
-    exportPdfButton.style.display = "block"; // Tampilkan tombol
-  } else {
-    exportPdfButton.style.display = "none"; // Sembunyikan tombol
-  }
-});
-console.log("Path Sekarang:", window.location.pathname);
