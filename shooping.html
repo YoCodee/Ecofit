@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shopping Cart</title>
+    <link rel="icon" type="image/ico" href="/image/pro-index/ICOFIT. (2).png" />
+    <link rel="stylesheet" href="./css/Shopping.css" />
+  </head>
+  <body>
+    <a
+      href="JualBeli.html"
+      style="text-decoration: none; color: black; font-size: 20px"
+      >Back</a
+    >
+    <h1>Shopping Page</h1>
+    <div class="cont">
+      <div class="sidebar">
+        <div class="cart">
+          <h2>Keranjang Belanja</h2>
+          <div id="cart-items"></div>
+          <p>Total: <span id="total-price">0</span> IDR</p>
+          <button id="checkout-btn">Checkout</button>
+        </div>
+        <div class="filter-section">
+          <h3>Filter Kategori:</h3>
+          <label
+            ><input type="checkbox" class="category-filter" value="Baju" />
+            Baju</label
+          >
+          <label
+            ><input type="checkbox" class="category-filter" value="Celana" />
+            Celana</label
+          >
+          <label
+            ><input type="checkbox" class="category-filter" value="Outer" />
+            Outer</label
+          >
+          <label
+            ><input type="checkbox" class="category-filter" value="Aksesoris" />
+            Aksesoris</label
+          >
+
+          <h3>Filter Size:</h3>
+          <label
+            ><input type="checkbox" class="size-filter" value="S" /> S</label
+          >
+          <label
+            ><input type="checkbox" class="size-filter" value="M" /> M</label
+          >
+          <label
+            ><input type="checkbox" class="size-filter" value="L" /> L</label
+          >
+          <label
+            ><input type="checkbox" class="size-filter" value="XL" /> XL</label
+          >
+          <label
+            ><input type="checkbox" class="size-filter" value="XXL" />
+            XXL</label
+          >
+        </div>
+        <button id="export-pdf" style="width: 100%">Download PDF</button>
+      </div>
+
+      <div class="container">
+        <div class="button-group">
+          <button id="market-btn">Market</button>
+          <button id="tukar-beli-btn">Tukar Beli</button>
+        </div>
+
+        <div
+          class="product-list"
+          style="display: grid; grid-template-columns: repeat(5, 1fr)"
+          id="product-list"
+        >
+          <p>Note : Barang yang ditukar harus sesuai dengan kategori nya</p>
+        </div>
+      </div>
+    </div>
+    <script src="./js/Shooping.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  </body>
+</html>
