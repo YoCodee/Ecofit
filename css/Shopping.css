@@ -81,7 +81,7 @@ label {
 }
 
 .sidebar {
-  flex: 1;
+  flex: 3;
   margin-right: 25px;
   border-right: 1px solid #ccc;
   padding-right: 40px;

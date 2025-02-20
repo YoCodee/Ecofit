@@ -159,20 +159,92 @@ const products = [
 const exchangeProducts = [
   {
     id: 1,
-    Title: "Jaket Bekas",
+    Title: "Baju Muslim Second",
     Price: "Gratis",
     image:
-      "https://down-id.img.susercontent.com/file/id-11134207-7qukw-limkogcy8cbb68.webp",
-    category: "Outer",
+      "https://down-id.img.susercontent.com/file/id-11134207-7rasm-m2ttrigy94jj13.webp",
+    category: "Baju",
     Size: "XL",
   },
   {
     id: 2,
-    Title: "Topi Vintage",
+    Title: "Baju Kasual Second ",
     Price: "Gratis",
     image:
-      "https://down-id.img.susercontent.com/file/id-11134207-7r98q-lsas60ie1n3b63.webp",
-    category: "Aksesoris",
+      "https://down-id.img.susercontent.com/file/ae0a567777ce42ca153146b01a032e2f@resize_w450_nl.webp",
+    category: "Baju",
+    Size: "L",
+  },
+  {
+    id: 3,
+    Title: "Preloved Baju",
+    Price: "Gratis",
+    image:
+      "https://down-id.img.susercontent.com/file/id-11134207-7rasb-m6445urp19c2d0@resize_w450_nl.webp",
+    category: "Baju",
+    Size: "L",
+  },
+  {
+    id: 4,
+    Title: "PRELOVED ATASAN WANITA DEWASA ",
+    Price: "Gratis",
+    image:
+      "https://down-id.img.susercontent.com/file/id-11134207-7rasd-m4rdbc42f0d28f@resize_w450_nl.webp",
+    category: "Baju",
+    Size: "M",
+  },
+  {
+    id: 5,
+    Title: "Baju Pria Second (Putih)",
+    Price: "Gratis",
+    image:
+      "https://down-id.img.susercontent.com/file/id-11134207-7rasc-m1f3vio7wstjba@resize_w450_nl.webp",
+    category: "Baju",
+    Size: "L",
+  },
+  {
+    id: 6,
+    Title: "Baju Pria Second (Hitam) ",
+    Price: "Gratis",
+    image:
+      "https://down-id.img.susercontent.com/file/id-11134207-7rasf-m1f3vio810iv0b.webp",
+    category: "Baju",
+    Size: "L",
+  },
+  {
+    id: 7,
+    Title: "Shirt Panama Misty",
+    Price: "Gratis",
+    image:
+      "https://down-id.img.susercontent.com/file/id-11134207-7r992-ltbz74vhg39564@resize_w450_nl.webp",
+    category: "Baju",
+    Size: "L",
+  },
+  {
+    id: 8,
+    Title: "Shirt Tropical Black ",
+    Price: "Gratis",
+    image:
+      "https://down-id.img.susercontent.com/file/id-11134207-7qul8-ljf44fr4mu0r2d@resize_w450_nl.webp",
+    category: "Baju",
+    Size: "XL",
+  },
+  {
+    id: 9,
+    Title: "T-Shirt Combine Whiteline Flow ",
+    Price: "Gratis",
+    image:
+      "https://down-id.img.susercontent.com/file/id-11134207-7r991-lorqzmj5sw8370.webp",
+    category: "Baju",
+    Size: "L",
+  },
+  {
+    id: 10,
+    Title: "Russ Sweater Crewneck Pria ",
+    Price: "Gratis",
+    image:
+      "https://down-id.img.susercontent.com/file/69b72f76398101fe927e561858651ffb@resize_w450_nl.webp",
+    category: "Outer",
     Size: "L",
   },
 ];
