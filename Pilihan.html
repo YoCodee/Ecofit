@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Eco-Fashion Designer</title>
+    <link rel="stylesheet" href="./css/pil.css" />
+  </head>
+  <body>
+    <a href="index.html" style="float: left;">Back</a>
+    <h1>Eco-Fashion Designer</h1>
+
+    <div class="game-container">
+
+      <div class="items-container">
+        <div class="category">
+          <h2>Aksesoris</h2>
+          <div class="items">
+            <img
+              src="https://down-id.img.susercontent.com/file/id-11134207-7r98p-lzk56z7979dx52.webp"
+              class="item"
+              draggable="true"
+              data-score="30"
+              data-category="Aksesoris"
+            />
+            <img
+              src="https://down-id.img.susercontent.com/file/id-11134207-7r98o-lkz0g59peby061@resize_w900_nl.webp"
+              class="item"
+              draggable="true"
+              data-score="20"
+              data-category="Aksesoris"
+            />
+          </div>
+        </div>
+        <div class="category">
+          <h2>Pakaian</h2>
+          <div class="items">
+            <img
+              src="https://down-id.img.susercontent.com/file/id-11134207-7r98r-lwscoug8w3vw5a.webp"
+              class="item"
+              draggable="true"
+              data-score="50"
+              data-category="Pakaian"
+            />
+            <img
+              src="https://down-id.img.susercontent.com/file/id-11134207-7rasg-m4is9wd0yb1q02@resize_w900_nl.webp"
+              class="item"
+              draggable="true"
+              data-score="15"
+              data-category="Pakaian"
+            />
+          </div>
+        </div>
+        <div class="category">
+          <h2>Celana</h2>
+          <div class="items">
+            <img
+              src="https://down-id.img.susercontent.com/file/id-11134207-7rbk4-m6h1aexye8q5a8.webp"
+              class="item"
+              draggable="true"
+              data-score="35"
+              data-category="Celana"
+            />
+            <img
+              src="https://down-id.img.susercontent.com/file/id-11134207-7r98p-lxqkz8rwwrq3db.webp"
+              class="item"
+              draggable="true"
+              data-score="25"
+              data-category="Celana"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Drop Zone -->
+      <div class="drop-zone">
+        <p id="dropText">Seret item ke sini</p>
+      </div>
+
+      <button id="cekSkor">Cek Skor</button>
+      <p id="hasilSkor"></p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="./js/pil.js"></script>
+  </body>
+</html>

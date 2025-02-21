@@ -1,0 +1,138 @@
+/* Reset default margin & padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    background-color: #f0f8ff;
+    padding: 20px;
+}
+
+h1 {
+    color: #2c3e50;
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+/* Container utama */
+.game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Section untuk aksesoris, pakaian, dan celana (horizontal) */
+.items-container {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+    transition: transform 0.2s;
+    max-width: 1200px;
+    width: 100%;
+}
+
+.items-container:hover {
+    transform: scale(1.02);
+}
+
+/* Setiap kategori (aksesoris, pakaian, celana) */
+.category {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.category h2 {
+    font-size: 1.5rem;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+/* Container untuk item */
+.items {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* Gambar item */
+.item {
+    width: 177px;
+    height: 177px;
+    object-fit: cover;
+    border-radius: 10px;
+    cursor: grab;
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 3px solid transparent;
+}
+
+.item:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+    border: 3px solid green;
+}
+
+/* Drop zone */
+.drop-zone {
+    width: 90%;
+    max-width: 600px;
+    height: 180px;
+    border: 3px dashed gray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    border-radius: 15px;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 15px;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.drop-zone img {
+    width: 110px;
+    height: 110px;
+    border-radius: 10px;
+}
+
+/* Efek saat drag item ke drop zone */
+.drop-zone.drag-over {
+    background-color: #e0ffe0;
+    border: 3px solid green;
+}
+
+/* Tombol cek skor */
+#cekSkor {
+    margin-top: 15px;
+    padding: 12px 20px;
+    font-size: 1.2rem;
+    background: #28a745;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+#cekSkor:hover {
+    background: #218838;
+    transform: scale(1.05);
+}
+
+#hasilSkor {
+    font-size: 1.3rem;
+    margin-top: 15px;
+    font-weight: bold;
+    color: #2c3e50;
+}
