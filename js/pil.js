@@ -81,3 +81,28 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
+document.addEventListener("DOMContentLoaded", () => {
+    const items = document.querySelectorAll(".item");
+    let tooltip = document.createElement("div");
+    tooltip.classList.add("tooltip");
+    document.body.appendChild(tooltip);
+
+    items.forEach(item => {
+        item.addEventListener("mouseenter", (e) => {
+            let material = item.getAttribute("data-material");
+            if (material) {
+                tooltip.textContent = material;
+                tooltip.style.opacity = "1";
+            }
+        });
+
+        item.addEventListener("mousemove", (e) => {
+            tooltip.style.top = `${e.clientY + 10}px`;
+            tooltip.style.left = `${e.clientX + 10}px`;
+        });
+
+        item.addEventListener("mouseleave", () => {
+            tooltip.style.opacity = "0";
+        });
+    });
+});

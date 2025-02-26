@@ -250,7 +250,45 @@ const exchangeProducts = [
 ];
 
 let cart = [];
+let userPoints = localStorage.getItem("userPoints") ? parseInt(localStorage.getItem("userPoints")) : 0;
 
+// Fungsi untuk memperbarui tampilan poin
+function updatePointsDisplay() {
+    let pointsContainer = document.getElementById("user-points");
+    if (!pointsContainer) {
+        pointsContainer = document.createElement("p");
+        pointsContainer.id = "user-points";
+        pointsContainer.style.fontWeight = "bold";
+        pointsContainer.style.fontSize = "18px";
+        document.body.insertBefore(pointsContainer, document.body.firstChild);
+    }
+    pointsContainer.innerText = `Poin Anda: ${userPoints}`;
+}
+
+// Fungsi untuk menambahkan poin setelah tukar baju
+function addPoints(points) {
+    userPoints += points;
+    localStorage.setItem("userPoints", userPoints);
+    updatePointsDisplay();
+}
+
+// Fungsi untuk mengurangi poin saat belanja di marketplace
+function deductPoints(points) {
+    if (userPoints >= points) {
+        userPoints -= points;
+        localStorage.setItem("userPoints", userPoints);
+        updatePointsDisplay();
+        return true;
+    } else {
+        Swal.fire("Gagal!", "Poin tidak mencukupi!", "error");
+        return false;
+    }
+}
+
+// Perbarui UI saat halaman dimuat
+document.addEventListener("DOMContentLoaded", function () {
+    updatePointsDisplay();
+});
 document.addEventListener("DOMContentLoaded", function () {
   const marketBtn = document.getElementById("market-btn");
   const tukarBeliBtn = document.getElementById("tukar-beli-btn");
@@ -378,40 +416,36 @@ function showTukarBeliForm(product) {
   formContainer.classList.add("modal");
 
   formContainer.innerHTML = `
-    <div class="modal-content">
-    <div class="modal">
-      <span class="close-btn">&times;</span>
-      <h3 class="judulcuba">Tukar ${product.Title}</h3>
-      <form id="tukarBeliForm">
-        <label>Nama:</label>
-        <input type="text" id="name" required>
+      <div class="modal-content">
+          <div class="modal">
+              <span class="close-btn">&times;</span>
+              <h3 class="judulcuba">Tukar ${product.Title}</h3>
+              <form id="tukarBeliForm">
+                  <label>Nama:</label>
+                  <input type="text" id="name" required>
 
-        <label>Nomor HP:</label>
-        <input type="text" id="phone" required>
+                  <label>Nomor HP:</label>
+                  <input type="text" id="phone" required>
 
-        <label>Upload Bukti:</label>
-        <input type="file" id="file" accept=".jpg, .png" required>
+                  <label>Upload Bukti:</label>
+                  <input type="file" id="file" accept=".jpg, .png" required>
 
-        <button type="submit">Kirim</button>
-        <button type="button" class="close-btn">Batal</button>
-      </form>
+                  <button type="submit">Kirim</button>
+                  <button type="button" class="close-btn">Batal</button>
+              </form>
+          </div>
       </div>
-    </div>
   `;
 
   document.body.appendChild(formContainer);
 
-  // Event untuk menutup modal
   document.querySelectorAll(".close-btn").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      document.body.removeChild(formContainer);
-    });
+      btn.addEventListener("click", () => {
+          document.body.removeChild(formContainer);
+      });
   });
 
-  // Event submit form
-  document
-    .getElementById("tukarBeliForm")
-    .addEventListener("submit", function (e) {
+  document.getElementById("tukarBeliForm").addEventListener("submit", function (e) {
       e.preventDefault();
 
       const name = document.getElementById("name").value;
@@ -419,12 +453,8 @@ function showTukarBeliForm(product) {
       const file = document.getElementById("file").files[0];
 
       if (!name || !phone || !file) {
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Semua kolom harus diisi!",
-        });
-        return;
+          Swal.fire("Oops...", "Semua kolom harus diisi!", "error");
+          return;
       }
 
       tukarBeliData.push({
@@ -433,25 +463,25 @@ function showTukarBeliForm(product) {
         product: product.Title,
         file: file.name, // Simpan nama file yang di-upload
       });
-    
 
-      // Tampilkan SweetAlert2 setelah form dikirim
       Swal.fire({
-        icon: "success",
-        title: "Permintaan Berhasil Dikirim!",
-        html: `
-        <p><strong>Nama:</strong> ${name}</p>
-        <p><strong>Nomor HP:</strong> ${phone}</p>
-        <p><strong>Barang Ditukar:</strong> ${product.Title}</p>
-        <p><strong>File:</strong> ${file.name}</p>
-        <p>Mohon tunggu konfirmasi dari admin.</p>
-      `,
-        confirmButtonText: "OK",
+          icon: "success",
+          title: "Permintaan Berhasil Dikirim!",
+          html: `
+              <p><strong>Nama:</strong> ${name}</p>
+              <p><strong>Nomor HP:</strong> ${phone}</p>
+              <p><strong>Barang Ditukar:</strong> ${product.Title}</p>
+              <p><strong>File:</strong> ${file.name}</p>
+              <p>Mohon tunggu konfirmasi dari admin.</p>
+          `,
+          confirmButtonText: "OK",
       });
 
-      // Hapus modal setelah sukses
+      // Tambahkan poin setelah berhasil menukar barang
+      addPoints(10); // Setiap tukar baju dapat 10 poin
+
       document.body.removeChild(formContainer);
-    });
+  });
 }
 document.addEventListener("DOMContentLoaded", function () {
   const checkoutBtn = document.getElementById("checkout-btn");
