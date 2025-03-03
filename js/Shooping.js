@@ -252,40 +252,39 @@ const exchangeProducts = [
 const points = [
   {
     id: 1,
-    Award: "T-Shirt Combine Whiteline Flow ",
+    Award: "T-Shirt Ecofit White ",
     PointRequired: "50",
     image:
-      "https://down-id.img.susercontent.com/file/id-11134207-7r991-lorqzmj5sw8370.webp"
+      "../image/tukarpoint/White And Grey Minimalist Mockup Instagram Post.png",
   },
   {
     id: 2,
-    Award: "T-Shirt Combine Whiteline Flow ",
+    Award: "T-Shirt Ecofit Black ",
     PointRequired: "50",
     image:
-      "https://down-id.img.susercontent.com/file/id-11134207-7r991-lorqzmj5sw8370.webp"
+      "../image/tukarpoint/Black and White Minimalist T-Shirt Mockup Instagram Post.png",
   },
   {
     id: 3,
-    Award: "T-Shirt Combine Whiteline Flow ",
-    PointRequired: "50",
+    Award: "Ecofit Tote Bag",
+    PointRequired: "20",
     image:
-      "https://down-id.img.susercontent.com/file/id-11134207-7r991-lorqzmj5sw8370.webp"
+      "../image/tukarpoint/White And Grey Minimalist Mockup Instagram Post (1).png",
   },
   {
     id: 4,
-    Award: "T-Shirt Combine Whiteline Flow ",
-    PointRequired: "50",
+    Award: "Ecofit Mug ",
+    PointRequired: "10",
     image:
-      "https://down-id.img.susercontent.com/file/id-11134207-7r991-lorqzmj5sw8370.webp"
+      "../image/tukarpoint/White And Grey Minimalist Mockup Instagram Post (3).png",
   },
   {
     id: 5,
-    Award: "T-Shirt Combine Whiteline Flow ",
-    PointRequired: "50",
+    Award: "Ecofit Hat",
+    PointRequired: "35",
     image:
-      "https://down-id.img.susercontent.com/file/id-11134207-7r991-lorqzmj5sw8370.webp"
+      "../image/tukarpoint/White And Grey Minimalist Mockup Instagram Post (5).png",
   },
-
 ];
 
 let cart = [];
@@ -293,7 +292,7 @@ let userPoints = localStorage.getItem("userPoints")
   ? parseInt(localStorage.getItem("userPoints"))
   : 0;
 
-let userAward = []
+let userAward = [];
 
 // Fungsi untuk memperbarui tampilan poin
 function updatePointsDisplay() {
@@ -354,15 +353,10 @@ document.addEventListener("DOMContentLoaded", function () {
         <h6>Kategori: ${product.PointRequired}</h6>
       
       
-           <button class="tukar-point" data-id="${product.id}">Tukar</button>`
-         
-       
-      ;
+           <button class="tukar-point" data-id="${product.id}">Tukar</button>`;
 
       productList.appendChild(productDiv);
     });
-
-
 
     document.querySelectorAll(".tukar-point").forEach((button) => {
       button.addEventListener("click", function () {
@@ -377,7 +371,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function showDisplayForm(product) {
     const formContainer = document.createElement("div");
     formContainer.classList.add("modal");
-  
+
     formContainer.innerHTML = `
         <div class="modal-content">
             <div class="modal">
@@ -400,24 +394,24 @@ document.addEventListener("DOMContentLoaded", function () {
             </div>
         </div>
     `;
-  
+
     document.body.appendChild(formContainer);
-  
+
     document.querySelectorAll(".close-btn").forEach((btn) => {
       btn.addEventListener("click", () => {
         document.body.removeChild(formContainer);
       });
     });
-  
+
     document
       .getElementById("tukarBeliForm")
       .addEventListener("submit", function (e) {
         e.preventDefault();
-  
+
         const name = document.getElementById("name").value;
         const phone = document.getElementById("phone").value;
         const file = document.getElementById("alamat").value;
-  
+
         if (!name || !phone || !file) {
           Swal.fire("Oops...", "Semua kolom harus diisi!", "error");
           return;
@@ -426,18 +420,18 @@ document.addEventListener("DOMContentLoaded", function () {
         if (userPoints < product.PointRequired) {
           Swal.fire("Oops...", "Poin tidak mencukupi!", "error");
           return;
-         
         }
 
         deductPoints(product.PointRequired);
-      
-  
+
         userAward.push({
+          name,
+          phone,
           Award: product.Award,
           PointRequired: product.PointRequired,
           image: product.image, // Simpan nama file yang di-upload
         });
-    
+
         Swal.fire({
           icon: "success",
           title: "Permintaan Berhasil Dikirim!",
@@ -449,8 +443,7 @@ document.addEventListener("DOMContentLoaded", function () {
             `,
           confirmButtonText: "OK",
         });
-  
-  
+
         document.body.removeChild(formContainer);
       });
   }
@@ -745,7 +738,7 @@ function showCheckoutModal() {
 
 document.addEventListener("DOMContentLoaded", function () {
   const exportPdfBtn = document.getElementById("export-pdf");
- 
+
   exportPdfBtn.addEventListener("click", function () {
     if (tukarBeliData.length === 0) {
       Swal.fire({
@@ -773,8 +766,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     doc.save("TukarBeli_Report.pdf");
   });
-
-
 });
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -797,15 +788,13 @@ document.addEventListener("DOMContentLoaded", function () {
     let y = 20;
     userAward.forEach((item, index) => {
       doc.text(`Data ${index + 1}:`, 10, y);
-      doc.text(`Nama: ${item.Award}`, 10, y + 10);
-      doc.text(`Nomor HP: ${item.PointRequired}`, 10, y + 20);
-      doc.text(`Barang Ditukar: ${item.image}`, 10, y + 30);
- 
+      doc.text(`Nama: ${item.name}`, 10, y + 10);
+      doc.text(`Nomor HP: ${item.phone}`, 10, y + 20);
+      doc.text(`Award: ${item.Award}`, 10, y + 30);
+
       y += 50;
     });
 
     doc.save("PointEarnedAward.pdf");
   });
 });
-
-
