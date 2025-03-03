@@ -249,51 +249,211 @@ const exchangeProducts = [
   },
 ];
 
+const points = [
+  {
+    id: 1,
+    Award: "T-Shirt Combine Whiteline Flow ",
+    PointRequired: "50",
+    image:
+      "https://down-id.img.susercontent.com/file/id-11134207-7r991-lorqzmj5sw8370.webp"
+  },
+  {
+    id: 2,
+    Award: "T-Shirt Combine Whiteline Flow ",
+    PointRequired: "50",
+    image:
+      "https://down-id.img.susercontent.com/file/id-11134207-7r991-lorqzmj5sw8370.webp"
+  },
+  {
+    id: 3,
+    Award: "T-Shirt Combine Whiteline Flow ",
+    PointRequired: "50",
+    image:
+      "https://down-id.img.susercontent.com/file/id-11134207-7r991-lorqzmj5sw8370.webp"
+  },
+  {
+    id: 4,
+    Award: "T-Shirt Combine Whiteline Flow ",
+    PointRequired: "50",
+    image:
+      "https://down-id.img.susercontent.com/file/id-11134207-7r991-lorqzmj5sw8370.webp"
+  },
+  {
+    id: 5,
+    Award: "T-Shirt Combine Whiteline Flow ",
+    PointRequired: "50",
+    image:
+      "https://down-id.img.susercontent.com/file/id-11134207-7r991-lorqzmj5sw8370.webp"
+  },
+
+];
+
 let cart = [];
-let userPoints = localStorage.getItem("userPoints") ? parseInt(localStorage.getItem("userPoints")) : 0;
+let userPoints = localStorage.getItem("userPoints")
+  ? parseInt(localStorage.getItem("userPoints"))
+  : 0;
+
+let userAward = []
 
 // Fungsi untuk memperbarui tampilan poin
 function updatePointsDisplay() {
-    let pointsContainer = document.getElementById("user-points");
-    if (!pointsContainer) {
-        pointsContainer = document.createElement("p");
-        pointsContainer.id = "user-points";
-        pointsContainer.style.fontWeight = "bold";
-        pointsContainer.style.fontSize = "18px";
-        document.body.insertBefore(pointsContainer, document.body.firstChild);
-    }
-    pointsContainer.innerText = `Poin Anda: ${userPoints}`;
+  let pointsContainer = document.getElementById("user-points");
+  if (!pointsContainer) {
+    pointsContainer = document.createElement("p");
+    pointsContainer.id = "user-points";
+    pointsContainer.style.fontWeight = "bold";
+    pointsContainer.style.fontSize = "18px";
+    document.body.insertBefore(pointsContainer, document.body.firstChild);
+  }
+  pointsContainer.innerText = `Poin Anda: ${userPoints}`;
 }
 
 // Fungsi untuk menambahkan poin setelah tukar baju
 function addPoints(points) {
-    userPoints += points;
-    localStorage.setItem("userPoints", userPoints);
-    updatePointsDisplay();
+  userPoints += points;
+  localStorage.setItem("userPoints", userPoints);
+  updatePointsDisplay();
 }
 
 // Fungsi untuk mengurangi poin saat belanja di marketplace
 function deductPoints(points) {
-    if (userPoints >= points) {
-        userPoints -= points;
-        localStorage.setItem("userPoints", userPoints);
-        updatePointsDisplay();
-        return true;
-    } else {
-        Swal.fire("Gagal!", "Poin tidak mencukupi!", "error");
-        return false;
-    }
+  if (userPoints >= points) {
+    userPoints -= points;
+    localStorage.setItem("userPoints", userPoints);
+    updatePointsDisplay();
+    return true;
+  } else {
+    Swal.fire("Gagal!", "Poin tidak mencukupi!", "error");
+    return false;
+  }
 }
 
 // Perbarui UI saat halaman dimuat
 document.addEventListener("DOMContentLoaded", function () {
-    updatePointsDisplay();
+  updatePointsDisplay();
 });
 document.addEventListener("DOMContentLoaded", function () {
   const marketBtn = document.getElementById("market-btn");
   const tukarBeliBtn = document.getElementById("tukar-beli-btn");
+  const tukarpoint = document.getElementById("tukar-point");
   const categoryFilters = document.querySelectorAll(".category-filter");
   const sizeFilters = document.querySelectorAll(".size-filter");
+
+  function displaypoint(productArray, isExchange = false) {
+    const productList = document.getElementById("product-list");
+    productList.innerHTML = "";
+
+    productArray.forEach((product) => {
+      const productDiv = document.createElement("div");
+      productDiv.classList.add("card");
+
+      productDiv.innerHTML = `
+     
+        <img src="${product.image}" alt="${product.Title}">
+        <h1 class="judulcuba">${product.Award}</h1>
+        <h6>Kategori: ${product.PointRequired}</h6>
+      
+      
+           <button class="tukar-point" data-id="${product.id}">Tukar</button>`
+         
+       
+      ;
+
+      productList.appendChild(productDiv);
+    });
+
+
+
+    document.querySelectorAll(".tukar-point").forEach((button) => {
+      button.addEventListener("click", function () {
+        const product = points.find(
+          (p) => p.id === parseInt(this.getAttribute("data-id"))
+        );
+        showDisplayForm(product);
+      });
+    });
+  }
+
+  function showDisplayForm(product) {
+    const formContainer = document.createElement("div");
+    formContainer.classList.add("modal");
+  
+    formContainer.innerHTML = `
+        <div class="modal-content">
+            <div class="modal">
+                <span class="close-btn">&times;</span>
+                <h3 class="judulcuba">Tukar ${product.Award}</h3>
+                <form id="tukarBeliForm">
+                    <label>Nama:</label>
+                    <input type="text" id="name" required>
+  
+                    <label>Nomor HP:</label>
+                    <input type="text" id="phone" required>
+
+                    <label>Alamat:</label>
+                    <input type="text" id="alamat" required>
+  
+  
+                    <button type="submit">Kirim</button>
+                    <button type="button" class="close-btn">Batal</button>
+                </form>
+            </div>
+        </div>
+    `;
+  
+    document.body.appendChild(formContainer);
+  
+    document.querySelectorAll(".close-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        document.body.removeChild(formContainer);
+      });
+    });
+  
+    document
+      .getElementById("tukarBeliForm")
+      .addEventListener("submit", function (e) {
+        e.preventDefault();
+  
+        const name = document.getElementById("name").value;
+        const phone = document.getElementById("phone").value;
+        const file = document.getElementById("alamat").value;
+  
+        if (!name || !phone || !file) {
+          Swal.fire("Oops...", "Semua kolom harus diisi!", "error");
+          return;
+        }
+
+        if (userPoints < product.PointRequired) {
+          Swal.fire("Oops...", "Poin tidak mencukupi!", "error");
+          return;
+         
+        }
+
+        deductPoints(product.PointRequired);
+      
+  
+        userAward.push({
+          Award: product.Award,
+          PointRequired: product.PointRequired,
+          image: product.image, // Simpan nama file yang di-upload
+        });
+    
+        Swal.fire({
+          icon: "success",
+          title: "Permintaan Berhasil Dikirim!",
+          html: `
+                <p><strong>Nama:</strong> ${name}</p>
+                <p><strong>Nomor HP:</strong> ${phone}</p>
+                <p><strong>Barang Ditukar dengan point:</strong> ${product.Award}</p>
+                <p>Mohon tunggu hadiah dari Admin ke alamat mmu</p>
+            `,
+          confirmButtonText: "OK",
+        });
+  
+  
+        document.body.removeChild(formContainer);
+      });
+  }
 
   marketBtn.addEventListener("click", function () {
     displayProducts(products);
@@ -301,6 +461,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   tukarBeliBtn.addEventListener("click", function () {
     displayProducts(exchangeProducts, true);
+  });
+
+  tukarpoint.addEventListener("click", function () {
+    displaypoint(points, true);
   });
 
   categoryFilters.forEach((checkbox) =>
@@ -440,12 +604,14 @@ function showTukarBeliForm(product) {
   document.body.appendChild(formContainer);
 
   document.querySelectorAll(".close-btn").forEach((btn) => {
-      btn.addEventListener("click", () => {
-          document.body.removeChild(formContainer);
-      });
+    btn.addEventListener("click", () => {
+      document.body.removeChild(formContainer);
+    });
   });
 
-  document.getElementById("tukarBeliForm").addEventListener("submit", function (e) {
+  document
+    .getElementById("tukarBeliForm")
+    .addEventListener("submit", function (e) {
       e.preventDefault();
 
       const name = document.getElementById("name").value;
@@ -453,8 +619,8 @@ function showTukarBeliForm(product) {
       const file = document.getElementById("file").files[0];
 
       if (!name || !phone || !file) {
-          Swal.fire("Oops...", "Semua kolom harus diisi!", "error");
-          return;
+        Swal.fire("Oops...", "Semua kolom harus diisi!", "error");
+        return;
       }
 
       tukarBeliData.push({
@@ -465,23 +631,23 @@ function showTukarBeliForm(product) {
       });
 
       Swal.fire({
-          icon: "success",
-          title: "Permintaan Berhasil Dikirim!",
-          html: `
+        icon: "success",
+        title: "Permintaan Berhasil Dikirim!",
+        html: `
               <p><strong>Nama:</strong> ${name}</p>
               <p><strong>Nomor HP:</strong> ${phone}</p>
               <p><strong>Barang Ditukar:</strong> ${product.Title}</p>
               <p><strong>File:</strong> ${file.name}</p>
               <p>Mohon tunggu konfirmasi dari admin.</p>
           `,
-          confirmButtonText: "OK",
+        confirmButtonText: "OK",
       });
 
       // Tambahkan poin setelah berhasil menukar barang
       addPoints(10); // Setiap tukar baju dapat 10 poin
 
       document.body.removeChild(formContainer);
-  });
+    });
 }
 document.addEventListener("DOMContentLoaded", function () {
   const checkoutBtn = document.getElementById("checkout-btn");
@@ -579,7 +745,7 @@ function showCheckoutModal() {
 
 document.addEventListener("DOMContentLoaded", function () {
   const exportPdfBtn = document.getElementById("export-pdf");
-
+ 
   exportPdfBtn.addEventListener("click", function () {
     if (tukarBeliData.length === 0) {
       Swal.fire({
@@ -606,6 +772,39 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     doc.save("TukarBeli_Report.pdf");
+  });
+
+
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  const exportPdfBtnPoint = document.getElementById("export-pdf-point");
+  exportPdfBtnPoint.addEventListener("click", function () {
+    if (userAward.length === 0) {
+      Swal.fire({
+        icon: "info",
+        title: "Tidak Ada Data",
+        text: "Belum ada transaksi Tukar Beli!",
+      });
+      return;
+    }
+
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    doc.text("Laporan Award", 10, 10);
+
+    let y = 20;
+    userAward.forEach((item, index) => {
+      doc.text(`Data ${index + 1}:`, 10, y);
+      doc.text(`Nama: ${item.Award}`, 10, y + 10);
+      doc.text(`Nomor HP: ${item.PointRequired}`, 10, y + 20);
+      doc.text(`Barang Ditukar: ${item.image}`, 10, y + 30);
+ 
+      y += 50;
+    });
+
+    doc.save("PointEarnedAward.pdf");
   });
 });
 
