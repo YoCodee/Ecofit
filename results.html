@@ -50,7 +50,7 @@
 
 .container {
     display: flex;
-    flex-wrap: wrap;
+ 
     justify-content: center;
 }
 
@@ -246,11 +246,12 @@ data-primary-color="#8c6144"
               >
                 
                 <div class="container"style="min-height: 82vh;" >
-                  <h1 style="font-size: 36px; font-weight: bold; margin-top: 4px; align-items: end; display: flex; color: #000000; text-align: center;" >
+                  <div class="">
+                  <h1 style="font-size: 36px; justify-content: center; font-weight: bold; margin-top: 4px; align-items: center; text-align: center; display: flex; color: #000000;" >
                     Hasil pencarian
                   </h1>
                   <div id="results" style="display: flex;  justify-content: center;">
-
+                  </div>
                   </div>
                 </div>
                 <div class="content-row full dark-section" data-bgcolor="#171717">
@@ -409,7 +410,7 @@ data-primary-color="#8c6144"
     {
       id: 11,
       style: "Nautical",
-      description: "Gaya Sopan dan asik",
+      description: "Gaya Santai yang sopan dan rapih.",
       image: "/image/img-style/6.png",
       condition: age === "young" && confidence === "yes",
     },
